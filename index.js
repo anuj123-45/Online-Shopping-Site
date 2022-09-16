@@ -25,7 +25,7 @@ result.products.map((value)=>{
           <p class="card-text">${value.description}</p>
           <p class="card-price"><b>Rs </b>${value.price}</p>
 
-         <a  class="btn btn-primary" onclick="addToCart(${id})"  >Add to cart</a>
+         <button  class="btn btn-primary" onClick="addToCart(${id})"  >Add to cart</button>
         </div>
         
       </div>`;
@@ -45,7 +45,7 @@ var store=document.getElementsByClassName("card-img-top");
 console.log(store);
 
 var tableData="";
-ids.add(id);
+// ids.add(id);
 function addToCart(id){
 
 console.log(result.products[id].title , result.products[id].price);
@@ -53,18 +53,22 @@ var title=result.products[id].title;
 var price=result.products[id].price;
 var image=result.products[id].thumbnail;
 
-tableData+=`<tr><td><img src="${image}" width="50%" height="50"></td><td>${title}</td><td><input type="number" value="1" style="width:34px"></td><td>${price}</td><td><i class="fa-sharp fa-solid fa-trash"></i></td></tr>`;
-ids.forEach((value)=>{
-  if(ids.has(value)){
+
+  if(ids.has(id)){
     alert("Item is already taken");
     return;
   }
-})
+
+
+tableData+=`<tr><td><img src="${image}" width="50%" height="50"></td><td>${title}</td><td><input type="number" value="1" style="width:34px"></td><td>${price}</td><td><i class="fa-sharp fa-solid fa-trash"></i></td></tr>`;
+ids.add(id);
+
 
 
 document.getElementById("foot").innerHTML=tableData;
-}
 
+
+}
 
 
 
