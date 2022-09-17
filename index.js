@@ -66,6 +66,7 @@ var image=result.products[id].thumbnail;
 
 var tab=$('#foot');
 var resu=`<tr><td><img src="${image}" width="75%" height="50"></td><td>${title}</td><td><input type="number" value="1" style="width:64px"></td><td>${price}</td><td ><i class="fa-sharp fa-solid fa-trash" class="delCart" onClick="delRow(${id})"></i></td></tr>`
+
 tab.append(resu);
 
 ids.add(id);
@@ -93,10 +94,21 @@ function delRow(mainId){
       
   }
 
-
-
   console.log("Item deleted");
 }
+
+// var tab2=document.getElementById("foot");
+// var tab3=$('#foot');
+// if(tab2.rows.length===0){
+//   tab3.append( `<tr colspan="5">
+//   <th style="text-align: center; font-size: 30px">
+//     Cart is empty
+//   </th>
+// </tr>` );
+// }
+
+
+
 
 
 $(document).ready(function () {
