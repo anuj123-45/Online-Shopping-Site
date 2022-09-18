@@ -1,5 +1,9 @@
 var result;
 var id=0;
+var cartCost=document.getElementById("cart-cost");
+var storeQuanity;
+var items=document.getElementById("items");
+var count_items=0;
 const getData=async()=>{
 
     
@@ -48,12 +52,45 @@ var tableData="";
 
 var delR=0;
 
+ var totalCost=0;
+// var quantity=parseInt(document.getElementById("quantity").value);
+// console.log("Quantity",quantity);
+var quantity;
+
+
+// var qB=document.getElementById("upd");
+// qB.addEventListener('click',()=>{
+//   updateCart(q,p,r)
+//   {
+//     var c=document.getElementById("up");
+//     // c.value=q*p;
+//     // totalCost=0;
+//     // totalCost+=c.value;
+//     r=0;
+//     r+=q*p;
+//     c.innerText=q*p;
+//     cartCost.innerText=r;
+//   }
+// })
+
+
+
+
 function addToCart(id){
 
 
 var title=result.products[id].title;
 var price=result.products[id].price;
 var image=result.products[id].thumbnail;
+
+// function calTotalCost(qtty,price){
+//   quantity=qtty;
+// totalCost+=(price)*parseInt(quantity);  
+
+// }
+
+// console.log(price);
+// console.log(quantity);'
 
 
   if(ids.has(id)){
@@ -62,25 +99,72 @@ var image=result.products[id].thumbnail;
   }
 
   console.log(result.products[id].title , result.products[id].price);
-//tableData+=`<tr><td><img src="${image}" width="50%" height="50"></td><td>${title}</td><td><input type="number" value="1" style="width:34px"></td><td>${price}</td><td ><i class="fa-sharp fa-solid fa-trash" class="delCart" onClick="delRow(${id})"></i></td></tr>`;
 
 var tab=$('#foot');
-var resu=`<tr><td><img src="${image}" width="75%" height="50"></td><td>${title}</td><td><input type="number" value="1" style="width:64px"></td><td>${price}</td><td ><i class="fa-sharp fa-solid fa-trash" class="delCart" onClick="delRow(${id})"></i></td></tr>`
+var qt=1;
+var resu=`<tr><td><img src="${image}" width="75%" height="50"></td><td>${title}</td><td><a href="#"><i class="fa-solid fa-minus fa-2x" id="dec" ></i></a><input type="numbers" value="1" style="width:64px"  id="quantity"  min="1"><a href="#"><i class="fa-solid fa-plus fa-2x" id="inc"></i></a></td><td id="up">${price}</td><td ><i class="fa-sharp fa-solid fa-trash" class="delCart" onClick="delRow(${id},${price})"></i></td></tr>`;
 
 tab.append(resu);
+items.innerText=++count_items
+var qty=document.getElementById("quantity");
+//var qty2=document.getElementById("quantity");
+
+
+
+var dec=document.getElementById("dec");
+var inc=document.getElementById("inc");
+
+
+dec.addEventListener('click',()=>{
+
+if(qty.value==1){
+   return;
+}
+   qty.value--;
+   console.log("sub");
+ 
+})
+
+
+inc.addEventListener('click',()=>{
+qty.value++;
+console.log("addd");
+})
+
+
+
+
+
+
+
+
+
+
+
+
+// var qty=document.getElementById("quantity").value;
+storeQuanity=qty.value;
+totalCost+=(price)*parseInt(storeQuanity);
+ cartCost.innerText=totalCost;
+
+ //updateCart(storeQuanity,price,totalCost);
 
 ids.add(id);
 
-//document.getElementById("foot").innerHTML=tableData;
 
 delR++;
 
 }
 
 
+
+
 var table=document.getElementById("foot");
-function delRow(mainId){
+
+
+function delRow(mainId,price){
   ids.delete(mainId);
+  items.innerText=--count_items;
   for(var i = 0; i < table.rows.length; i++)
   {
       table.rows[i].cells[4].onclick = function()
@@ -88,24 +172,19 @@ function delRow(mainId){
           
               index = this.parentElement.rowIndex;
               table.deleteRow(index);
+              totalCost-=(price)*parseInt(storeQuanity);
+             cartCost.innerText=totalCost;
+
            
      
       };
       
   }
-
-  console.log("Item deleted");
 }
 
-// var tab2=document.getElementById("foot");
-// var tab3=$('#foot');
-// if(tab2.rows.length===0){
-//   tab3.append( `<tr colspan="5">
-//   <th style="text-align: center; font-size: 30px">
-//     Cart is empty
-//   </th>
-// </tr>` );
-// }
+
+  console.log("Item deleted");
+
 
 
 
@@ -117,3 +196,5 @@ $(document).ready(function () {
          keyboard: false
   })
  });
+
+
