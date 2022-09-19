@@ -1,7 +1,7 @@
 var result;
 var id=0;
 var cartCost=document.getElementById("cart-cost");
-var storeQuanity;
+
 var items=document.getElementById("items");
 var count_items=0;
 const getData=async()=>{
@@ -53,44 +53,25 @@ var tableData="";
 var delR=0;
 
  var totalCost=0;
-// var quantity=parseInt(document.getElementById("quantity").value);
-// console.log("Quantity",quantity);
+
 var quantity;
 
 
-// var qB=document.getElementById("upd");
-// qB.addEventListener('click',()=>{
-//   updateCart(q,p,r)
-//   {
-//     var c=document.getElementById("up");
-//     // c.value=q*p;
-//     // totalCost=0;
-//     // totalCost+=c.value;
-//     r=0;
-//     r+=q*p;
-//     c.innerText=q*p;
-//     cartCost.innerText=r;
-//   }
-// })
 
 
 
+var storeQuanity;
 
+// generating ids
+var qt=100;
+var pt=200;
 function addToCart(id){
-
 
 var title=result.products[id].title;
 var price=result.products[id].price;
 var image=result.products[id].thumbnail;
 
-// function calTotalCost(qtty,price){
-//   quantity=qtty;
-// totalCost+=(price)*parseInt(quantity);  
 
-// }
-
-// console.log(price);
-// console.log(quantity);'
 
 
   if(ids.has(id)){
@@ -101,78 +82,83 @@ var image=result.products[id].thumbnail;
   console.log(result.products[id].title , result.products[id].price);
 
 var tab=$('#foot');
-var qt=1;
-var resu=`<tr><td><img src="${image}" width="75%" height="50"></td><td>${title}</td><td><a href="#"><i class="fa-solid fa-minus fa-2x" id="dec" ></i></a><input type="numbers" value="1" style="width:64px"  id="quantity"  min="1"><a href="#"><i class="fa-solid fa-plus fa-2x" id="inc"></i></a></td><td id="up">${price}</td><td ><i class="fa-sharp fa-solid fa-trash" class="delCart" onClick="delRow(${id},${price})"></i></td></tr>`;
+
+
+var resu=`<tr><td><img src="${image}" width="75%" height="50"></td><td>${title}</td><td><a href="#"><i class="fa-solid fa-minus fa-2x" onclick="msg(${qt},${price},${pt})" ></i></a><input type="numbers" value="1" style="width:64px"  id=${qt}  min="1" disabled><a href="#"><i class="fa-solid fa-plus fa-2x" onclick="msg2(${qt},${price},${pt})"></i></a></td><td id=${pt}>${price}</td><td ><i class="fa-sharp fa-solid fa-trash" class="delCart" onclick="delRow(${qt},${id},${price})"></i></td></tr>`;
 
 tab.append(resu);
+var qty=document.getElementById(qt);
+qt++;
+pt++;
 items.innerText=++count_items
-var qty=document.getElementById("quantity");
-//var qty2=document.getElementById("quantity");
 
 
-
-var dec=document.getElementById("dec");
-var inc=document.getElementById("inc");
-
-
-dec.addEventListener('click',()=>{
-
-if(qty.value==1){
-   return;
-}
-   qty.value--;
-   console.log("sub");
- 
-})
-
-
-inc.addEventListener('click',()=>{
-qty.value++;
-console.log("addd");
-})
-
-
-
-
-
-
-
-
-
-
-
-
-// var qty=document.getElementById("quantity").value;
 storeQuanity=qty.value;
 totalCost+=(price)*parseInt(storeQuanity);
  cartCost.innerText=totalCost;
+ console.log(totalCost);
 
- //updateCart(storeQuanity,price,totalCost);
+
 
 ids.add(id);
-
 
 delR++;
 
 }
 
 
+function msg(val,p,q){
+    if(document.getElementById(val).value==1){
+        return;
+     }
+   
+        var y=document.getElementById(val).value;
+        totalCost-=p*parseInt(y);
+        document.getElementById(val).value=--y;
+    var z=document.getElementById(q);
+    z.innerText=p*(parseInt(y));
+        totalCost+=(p)*parseInt(y);
+        cartCost.innerText=totalCost;
+        console.log("sub");
+    
+}
+
+function msg2(val,p,q){
+
+var y=document.getElementById(val).value;
+totalCost-=p*parseInt(y);
+document.getElementById(val).value=++y;
+
+var z=document.getElementById(q);
+z.innerText=p*(parseInt(y));
+totalCost+=(p)*parseInt(y);
+ cartCost.innerText=totalCost;
+
+
+
+
+
+}
+
 
 
 var table=document.getElementById("foot");
 
 
-function delRow(mainId,price){
+function delRow(v,mainId,price){
+  var y=document.getElementById(v).value;
   ids.delete(mainId);
   items.innerText=--count_items;
   for(var i = 0; i < table.rows.length; i++)
   {
       table.rows[i].cells[4].onclick = function()
       {
-          
+          console.log(v);
               index = this.parentElement.rowIndex;
               table.deleteRow(index);
-              totalCost-=(price)*parseInt(storeQuanity);
+             
+              totalCost-=(price)*parseInt(y);
+              console.log(totalCost);
              cartCost.innerText=totalCost;
 
            
@@ -182,8 +168,6 @@ function delRow(mainId,price){
   }
 }
 
-
-  console.log("Item deleted");
 
 
 
@@ -196,5 +180,4 @@ $(document).ready(function () {
          keyboard: false
   })
  });
-
 
