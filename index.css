@@ -12,9 +12,17 @@
     color:green;
 }
 
-.srch{
-    background-color:whitesmoke;
-    border-radius: 10px;
-   position: relative;
-}
 
+
+
+
+
+body{
+    background-image: url('https://img.freepik.com/free-photo/black-friday-elements-assortment_23-2149074076.jpg?w=2000');
+	background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+ 
+ 
+
+}

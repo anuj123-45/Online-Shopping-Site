@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+    crossorigin="anonymous"
+  />
+    <style>
+        	body{
+		background-image:url('https://img.lovepik.com/background/20211021/large/lovepik-shopping-cart-background-image_500406021.jpg');
+	background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+  opacity: 0.8;
+
+	}
+    </style>
+</head>
+<body>
+  
+        <h2 style="text-align:center">Your Data</h2>
+     
+       <div class="container d-flex justify-content-center">
+       
+            <table class="table table-bordered container">
+                <thead>
+                  <tr>
+                    <th scope="col" id="1"></th>
+            
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="col" id="2"></th>
+               
+                  </tr>
+                  <tr>
+                    <th scope="col" id="3"></th>
+                  </tr>
+                  <tr>
+                    <th scope="col" id="4"></th>
+          
+                  </tr>
+                  <tr>
+                    <th scope="col" id="5"></th>
+          
+                  </tr>
+                </tbody>
+    
+              </table> 
+        
+       </div>
+ 
+<center>
+<a href="card.html"><button class="btn btn-primary">Pay Using Credit card</button></a>
+<a href="card.html"><button class="btn btn-primary">Pay Using Debit card</button></a>
+<a href="upi.html"><button class="btn btn-primary">Pay Using UPI id</button></a>
+<a href="thank you.html"><button class="btn btn-primary">Pay Using Cash on delivery</button></a>
+</center>
+</body>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+crossorigin="anonymous"
+></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    document.getElementById("1").innerText=sessionStorage.getItem("Name");
+    document.getElementById("2").innerText=sessionStorage.getItem("Email");
+    document.getElementById("3").innerText=sessionStorage.getItem("Address");
+    document.getElementById("4").innerText=sessionStorage.getItem("Phone");
+    document.getElementById("5").innerText=sessionStorage.getItem("Any other message");
+
+
+</script>
+</html>

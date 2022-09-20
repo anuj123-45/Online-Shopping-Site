@@ -1,0 +1,260 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+    crossorigin="anonymous"
+  />
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+  crossorigin="anonymous"
+></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+    	body{
+		background-image: url('https://cdn.shopify.com/s/files/1/0200/7466/articles/blog-checkout_1400x.jpg?v=1592935831');
+	background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+  opacity: 0.8;
+
+	}
+
+    h1{
+        font-size: 40px;
+        color:rgb(18, 10, 239);
+        font-family: 'Times New Roman', Times, serif;
+    }
+    h3{
+        color:rgb(249, 5, 229);
+        font-size: 30px;
+    }
+#s{
+    color:rgb(0, 0, 0);
+}
+
+label{
+    font-weight: bolder;
+}
+
+    </style>
+</head>
+<body>
+    <h1 >Checkout</h1>
+    <h3>Total Cost of items is: Rs <span id="s"></span></h3>
+  <br><br>
+    <div class="container" style="width: 700px;height:400px">
+        <h2 style="text-align:center">Enter your Details</h2>
+        <form>
+            <div class="form-group">
+                <label for="name">Enter your name</label>
+                <input  class="form-control" id="name" placeholder="Enter your name">
+                <small id="namevalid" class="form-text text-danger invalid-feedback danger">
+                    Your username must be 3 to 15 characters long and should not start with a number
+                  </small>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="text" class="form-control" id="email" placeholder="name@example.com">
+                <small id="emailvalid" class="form-text text-danger invalid-feedback danger">
+                    Your email must be a valid email.
+                    </small>
+        
+            </div>
+     
+            <div class="form-group">
+                <label for="address">Enter your address</label>
+                <textarea class="form-control" id="address" rows="3"></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+                <label for="phone">Enter your phone number</label>
+                <input class="form-control" id="phone" rows="3"></input>
+                <small id="phonevalid" class="form-text text-danger invalid-feedback danger">
+                  Your phone number should be of 10 digits.
+                  </small>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Any other meessage....</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+         <button  id="submit"  class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+<script >
+    document.getElementById("s").innerText=sessionStorage.getItem("Total Cost");
+  
+
+const nam = document.getElementById("name");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
+
+let validnam = false;
+let validemail = false;
+let validphone = false;
+
+
+
+
+/*for username*/
+nam.addEventListener("blur", () => {
+  let regex = /^[a-zA-Z]([a-zA-Z0-9\s]){2,14}$/;
+  str = nam.value;
+
+  console.log(regex, str);
+  if (regex.test(str)) {
+    console.log("Matches");
+    validnam=true;
+    nam.classList.remove("is-invalid");
+    nam.classList.add("is-valid");
+  } else {
+    console.log("Not Matches");
+    nam.classList.add("is-invalid");
+    validnam = false;
+  }
+});
+
+
+/*for email*/
+email.addEventListener("blur", () => {
+  console.log("email is blurred");
+  // validate email here
+
+  let regex =
+    /^([^0-9][_\-\.a-zA-Z0-9]+)@([_\-\.a-zA-Z0-9]+)\.([a-zA-Z]){2,7}$/;
+  let str = email.value;
+
+  console.log(regex, str);
+  if (regex.test(str)) {
+    console.log("Matches");
+    validemail=true;
+    email.classList.remove("is-invalid");
+    email.classList.add("is-valid");
+  } else {
+    console.log("Not matches");
+    email.classList.add("is-invalid");
+    validemail=false;
+  }
+});
+
+/*for phone*/
+phone.addEventListener("blur", () => {
+  console.log("phone is blurred");
+  // validate phone here
+
+  let regex = /^([0-9]){10}$/;
+  let str = phone.value;
+
+  console.log(regex, str);
+  if (regex.test(str)) {
+    console.log("Matches");
+    validphone=true;
+    phone.classList.remove("is-invalid");
+    phone.classList.add("is-valid");
+  } else {
+    console.log("Not matches");
+    phone.classList.add("is-invalid");
+    validphone=false;
+  }
+});
+
+
+/*for submitting the form*/
+
+let submit = document.getElementById("submit");
+submit.addEventListener("click", (e) => {
+  e.preventDefault();
+  sessionStorage.setItem("Name",nam.value);
+sessionStorage.setItem("Email",email.value);
+sessionStorage.setItem("Address",document.getElementById("address").value);
+sessionStorage.setItem("Phone",phone.value);
+sessionStorage.setItem("Any other message",document.getElementById("exampleFormControlTextarea1").value);
+
+
+
+  console.log("You click on submit button");
+  // submit your form
+  if (validnam && validemail && validphone) {
+    console.log(
+      "username , email and phone no are valid , Submitting the form"
+    );
+    window.location.href="order.html";
+  
+
+  } else {
+    console.log(
+      "one of username , email or phone is not  valid , Hence not submitting the form. try again"
+    );
+
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </script>
+</html>
+
