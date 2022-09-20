@@ -181,3 +181,28 @@ $(document).ready(function () {
   })
  });
 
+var storeList=document.getElementById("srch");
+
+ const getUserChoice=async()=>{
+  const data=await fetch("https://dummyjson.com/products");
+  const res2=await data.json();
+  console.log(res2.products);
+
+
+res2.products.map((value)=>{
+// var listData="";
+// listData+=`<li>${value.title}</li>`;
+// storeList.innerHTML=listData;
+console.log(value.title);
+})
+
+
+
+ }
+
+getUserChoice();
+
+
+// function show(){
+//  $('.autocom-box').show();
+// }
