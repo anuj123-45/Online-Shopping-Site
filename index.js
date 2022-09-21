@@ -177,9 +177,7 @@ function sh(){
   $('#delsearch').show();
 }
 
-function hidediv(){
-  $('#delsearch').hide();
-}
+
 
 
 $(document).ready(function () {
