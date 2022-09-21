@@ -1,40 +1,43 @@
 var result;
-var id = 1;
+var id;
 var cartCost = document.getElementById("cart-cost");
-
+var storeApi=[];
 var items = document.getElementById("items");
 var count_items = 0;
 const getData = async () => {
   const data = await fetch("https://dummyjson.com/products");
   result = await data.json();
   console.log(result.products);
-  show(result);
+  storeApi=result.products;
+  console.log("storeapi",storeApi);
+  show(storeApi);
 };
 
 getData();
 
 const ids = new Set(); // set for checking ids
-function show(result) {
+function show(products) {
   var data2 = "";
 
-  result.products.map((value) => {
+  id=1;
+products.map((value)=>{
     data2 += ` <div class="d-inline-block col-lg-3 card"   id=${id} style="width:18rem;">
-        <img class="card-img-top" src=${value.thumbnail} width="100%" height="200">
-      
-        <div class="card-body">
-        <h5 class="card-title">${value.title}</h5>
-       
-          <p class="card-text">${value.description}</p>
-          <p class="card-price"><b>$ </b>${value.price}</p>
+    <img class="card-img-top" src=${value.thumbnail} width="100%" height="200">
+  
+    <div class="card-body">
+    <h5 class="card-title">${value.title}</h5>
+   
+      <p class="card-text">${value.description}</p>
+      <p class="card-price"><b>$ </b>${value.price}</p>
 
-         <button  class="btn btn-primary add-to" onClick="addToCart(${id})"  >Add to cart</button>
-        </div>
-        
-      </div>`;
+     <button  class="btn btn-primary add-to" onclick="addToCart(${id})"  >Add to cart</button>
+    </div>
+    
+  </div>`;
 
     id++;
   });
-
+console.log(data2);
   document.getElementById("d").innerHTML = data2;
 }
 
@@ -55,9 +58,9 @@ var storeQuanity;
 var qt = 100;
 var pt = 200;
 function addToCart(id) {
-  var title = result.products[id].title;
-  var price = result.products[id].price;
-  var image = result.products[id].thumbnail;
+  var title = storeApi[id].title;
+  var price = storeApi[id].price;
+  var image = storeApi[id].thumbnail;
 
   if (ids.has(id)) {
     alert("Item is already taken");
@@ -189,3 +192,18 @@ $(document).ready(function () {
 function takeTotal() {
   sessionStorage.setItem("Total Cost", cartCost.innerText);
 }
+var filterProducts=[];
+
+function search(val) {
+	let filterProducts = result.products.filter((product) =>
+		product.title.toLowerCase().includes(val.toLowerCase())
+	);
+  console.log("filter",filterProducts);
+  show(filterProducts);
+}
+
+document.getElementById("inp").addEventListener('keyup',(e)=>{
+  search(e.target.value);
+})
+
+
