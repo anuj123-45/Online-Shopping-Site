@@ -1,5 +1,5 @@
 var result;
-var id = 0;
+var id = 1;
 var cartCost = document.getElementById("cart-cost");
 
 var items = document.getElementById("items");
@@ -18,7 +18,7 @@ function show(result) {
   var data2 = "";
 
   result.products.map((value) => {
-    data2 += ` <div class="card d-inline-block col-lg-3"   id=${id}  style="width: 18rem";>
+    data2 += ` <div class="d-inline-block col-lg-3 card"   id=${id} style="width:18rem;">
         <img class="card-img-top" src=${value.thumbnail} width="100%" height="200">
         <div class="card-body"><h5 class="card-title">${value.title}</h5>
           <p class="card-text">${value.description}</p>
@@ -128,25 +128,29 @@ function delRow(v, mainId, price) {
     };
   }
 }
-  function ok(){
-const input = document.getElementById("inp").value.toUpperCase();
-
+  function doSearch(){
+var inp = document.getElementById("inp").value;
+inp=inp.toUpperCase();
   const cardContainer = document.getElementById("d");
   // console.log(cardContainer);
 
-  var cards = cardContainer.getElementsByClassName("card");
-  console.log(cards);
+  var card = cardContainer.getElementsByClassName("card");
+  // console.log(cards);
 
-  for (var i = 0; i < cards.length; i++) {
-    var ti = cards[i].querySelector(".card-body h5.card-title");
-    console.log(ti.innerText.toUpperCase());
+  for (var j = 0; j < card.length; j++) {
    
-    if (((ti.innerText).toUpperCase()).indexOf(input) > -1) {
-       cards[i].style.display = "";
+    // console.log(ti.innerText.toUpperCase());
+   var title_name= card[j].querySelector(".card-body h5.card-title");
+    if (title_name.innerText.toUpperCase().indexOf(inp) > -1) {
+    
+       card[j].style.display = "";
+       console.log(card[j]);
+     
     } 
 
     else{
-      cards[i].style.display = "none";
+   
+      card[j].style.display = "none";
     }
   }
 }
