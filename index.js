@@ -20,9 +20,12 @@ function show(result) {
   result.products.map((value) => {
     data2 += ` <div class="d-inline-block col-lg-3 card"   id=${id} style="width:18rem;">
         <img class="card-img-top" src=${value.thumbnail} width="100%" height="200">
-        <div class="card-body"><h5 class="card-title">${value.title}</h5>
+      
+        <div class="card-body">
+        <h5 class="card-title">${value.title}</h5>
+       
           <p class="card-text">${value.description}</p>
-          <p class="card-price"><b>Rs </b>${value.price}</p>
+          <p class="card-price"><b>$ </b>${value.price}</p>
 
          <button  class="btn btn-primary add-to" onClick="addToCart(${id})"  >Add to cart</button>
         </div>
@@ -128,32 +131,53 @@ function delRow(v, mainId, price) {
     };
   }
 }
-  function doSearch(){
-var inp = document.getElementById("inp").value;
-inp=inp.toUpperCase();
-  const cardContainer = document.getElementById("d");
-  // console.log(cardContainer);
 
-  var card = cardContainer.getElementsByClassName("card");
-  // console.log(cards);
 
-  for (var j = 0; j < card.length; j++) {
-   
-    // console.log(ti.innerText.toUpperCase());
-   var title_name= card[j].querySelector(".card-body h5.card-title");
-    if (title_name.innerText.toUpperCase().indexOf(inp) > -1) {
-    
-       card[j].style.display = "";
-       console.log(card[j]);
-     
-    } 
+let title=[];
+const input=document.querySelector("#searchlist");
+const inpelement=document.querySelector("#inp");
 
-    else{
-   
-      card[j].style.display = "none";
-    }
+const data2 = async () => {
+  const data = await fetch("https://dummyjson.com/products");
+ const  result = await data.json();
+  title=result.products.map((x)=>x.title);
+  loadData(title,input)
+  console.log(title);
+};
+
+
+function loadData(data,element){
+  if(data){
+    element.innerHTML = "";
+    let innerElement="";
+    data.forEach((item)=>{
+      innerElement+=`<li>${item}</li>`;
+    })
+    element.innerHTML=innerElement;
   }
 }
+
+
+function filterData(data,searchText){
+  return data.filter((x)=>x.toLowerCase().includes(searchText.toLowerCase()));
+
+}
+data2();
+
+inpelement.addEventListener("input",function(){
+ const filterdata= filterData(title,inpelement.value);
+loadData(filterdata,input);
+})
+
+
+function sh(){
+  $('#delsearch').show();
+}
+
+function hidediv(){
+  $('#delsearch').hide();
+}
+
 
 $(document).ready(function () {
   $("#exampleModal").modal({

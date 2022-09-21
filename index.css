@@ -27,3 +27,28 @@ body{
 
 }
 
+.autocomplete-list{
+    background-color: white;
+   
+   top:0;
+   left:0;
+    border-radius: 10px;
+    list-style-type: none;
+
+    margin:0;
+    padding:0;
+    max-height: 100px;
+    overflow-y: auto;
+}
+.auto-div{
+    margin-top:-16px;
+   
+}
+
+
+.autocomplete-list li:hover{
+ background:whitesmoke;
+ cursor:default;
+
+}
+
