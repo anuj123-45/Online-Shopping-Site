@@ -4,6 +4,12 @@ var cartCost = document.getElementById("cart-cost");
 var storeApi=[];
 var items = document.getElementById("items");
 var count_items = 0;
+var getQuantityItems=document.getElementById("itemsquantity");
+var count_quantity=0;
+
+
+
+
 const getData = async () => {
   const data = await fetch("https://dummyjson.com/products");
   result = await data.json();
@@ -29,17 +35,34 @@ products.map((value)=>{
    
       <p class="card-text">${value.description}</p>
       <p class="card-price"><b>$ </b>${value.price}</p>
+      <p class="card-rating" style="background:skyblue;width:110px;border-radius:5px;"><b>Rating: </b>${value.rating}<i style="color:yellow;" class="fa-solid fa-star"></i></p>
 
-     <button  class="btn btn-primary add-to" onclick="addToCart(${id})"  >Add to cart</button>
+     <button class="btn btn-primary add-to" onclick="addToCart(${id})"  >Add to cart</button>
     </div>
     
   </div>`;
 
     id++;
+
   });
-console.log(data2);
   document.getElementById("d").innerHTML = data2;
 }
+
+
+
+// document.querySelector('.add-to').addEventListener('hover',()=>{
+//   document.querySelector('.add-to').classList.remove("btn-primary");
+//   document.querySelector('.add-to').classList.add("btn-warning");
+//   console.log("Hover");
+// })
+
+
+
+
+
+
+
+
 
 var store = document.getElementsByClassName("card-img-top");
 console.log(store);
@@ -58,6 +81,7 @@ var storeQuanity;
 var qt = 100;
 var pt = 200;
 function addToCart(id) {
+
   var title = storeApi[id].title;
   var price = storeApi[id].price;
   var image = storeApi[id].thumbnail;
@@ -66,6 +90,9 @@ function addToCart(id) {
     alert("Item is already taken");
     return;
   }
+
+  count_quantity++;
+  getQuantityItems.innerText=count_quantity;
 
   console.log(result.products[id].title, result.products[id].price);
 
@@ -95,6 +122,9 @@ function msg(val, p, q) {
     return;
   }
 
+  count_quantity--;
+  getQuantityItems.innerText=count_quantity;
+
   var y = document.getElementById(val).value;
   totalCost -= p * parseInt(y);
   document.getElementById(val).value = --y;
@@ -106,6 +136,8 @@ function msg(val, p, q) {
 }
 
 function msg2(val, p, q) {
+  count_quantity++;
+  getQuantityItems.innerText=count_quantity;
   var y = document.getElementById(val).value;
   totalCost -= p * parseInt(y);
   document.getElementById(val).value = ++y;
@@ -122,12 +154,18 @@ function delRow(v, mainId, price) {
   var y = document.getElementById(v).value;
   ids.delete(mainId);
   items.innerText = --count_items;
+
+
+  
+
+
   for (var i = 0; i < table.rows.length; i++) {
     table.rows[i].cells[4].onclick = function () {
       console.log(v);
       index = this.parentElement.rowIndex;
       table.deleteRow(index);
-
+      count_quantity-=y;
+      getQuantityItems.innerText=count_quantity;
       totalCost -= price * parseInt(y);
       console.log(totalCost);
       cartCost.innerText = totalCost;
