@@ -50,19 +50,6 @@ products.map((value)=>{
 
 
 
-// document.querySelector('.add-to').addEventListener('hover',()=>{
-//   document.querySelector('.add-to').classList.remove("btn-primary");
-//   document.querySelector('.add-to').classList.add("btn-warning");
-//   console.log("Hover");
-// })
-
-
-
-
-
-
-
-
 
 var store = document.getElementsByClassName("card-img-top");
 console.log(store);
