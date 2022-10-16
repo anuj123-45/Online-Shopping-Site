@@ -14,6 +14,7 @@ const getData = async () => {
   const data = await fetch("https://dummyjson.com/products");
   result = await data.json();
   console.log(result.products);
+
   storeApi=result.products;
   console.log("storeapi",storeApi);
   show(storeApi);
@@ -69,9 +70,9 @@ var qt = 100;
 var pt = 200;
 function addToCart(id) {
 
-  var title = storeApi[id].title;
-  var price = storeApi[id].price;
-  var image = storeApi[id].thumbnail;
+  var title = storeApi[id-1].title;
+  var price = storeApi[id-1].price;
+  var image = storeApi[id-1].thumbnail;
 
   if (ids.has(id)) {
     alert("Item is already taken");
@@ -201,9 +202,6 @@ loadData(filterdata,input);
 function sh(){
   $('#delsearch').show();
 }
-
-
-
 
 $(document).ready(function () {
   $("#exampleModal").modal({
